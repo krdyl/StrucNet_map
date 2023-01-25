@@ -94,7 +94,7 @@ $(window).on('load', function() {
   /**
    * Assigns points to appropriate layers and clusters them if needed
    */
-  function mapPoints(points, layers) {
+  function mapPoints(points, layers, baselayers) {
     var markerArray = [];
     // check that map has loaded before adding points to it?
     for (var i in points) {
@@ -160,9 +160,7 @@ $(window).on('load', function() {
     // if layers.length === 0, add points to map instead of layer
     if (layers === undefined || layers.length === 0) {
       map.addLayer(
-        clusters
-        ? L.markerClusterGroup().addLayer(group).addTo(map)
-        : group
+        clusters ? L.markerClusterGroup().addLayer(group).addTo(map) : group
       );
     } else {
       if (clusters) {
@@ -176,20 +174,22 @@ $(window).on('load', function() {
         }
       }
 
-      var pos = (getSetting('_pointsLegendPos') == 'off')
-        ? 'topleft'
-        : getSetting('_pointsLegendPos');
+    }
 
-      var pointsLegend = L.control.layers(null, layers, {
-        collapsed: false,
-        position: pos,
-      });
+    // add legend if in settings
+    var pos = (getSetting('_pointsLegendPos') == 'off') ? 'topleft' : getSetting('_pointsLegendPos');
+  
 
-      if (getSetting('_pointsLegendPos') !== 'off') {
-        pointsLegend.addTo(map);
-        pointsLegend._container.id = 'points-legend';
-        pointsLegend._container.className += ' ladder';
-      }
+    // TODO: adding baselayers for OSM and sattelite here breaks stuff
+    var pointsLegend = L.control.layers(null, layers, {
+      collapsed: false,
+      position: pos,
+    });
+
+    if (getSetting('_pointsLegendPos') !== 'off') {
+      pointsLegend.addTo(map);
+      pointsLegend._container.id = 'points-legend';
+      pointsLegend._container.className += ' ladder';
     }
 
     $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
@@ -291,14 +291,14 @@ $(window).on('load', function() {
     createDocumentSettings(options);
 
     document.title = getSetting('_mapTitle');
-    addBaseMap();
+    baselayers = addBaseMap();
 
     // Add point markers to the map
     var layers;
     var group = '';
     if (points && points.length > 0) {
       layers = determineLayers(points);
-      group = mapPoints(points, layers);
+      group = mapPoints(points, layers, baselayers);
     } else {
       completePoints = true;
     }
@@ -493,20 +493,24 @@ $(window).on('load', function() {
    * Loads the basemap and adds it to the map
    */
   function addBaseMap() {
-    console.log("adding base map")
     L.mapbox.accessToken = 'pk.eyJ1IjoiYXJtc3RvbmoiLCJhIjoiY2wxcHpzNTdzMWRzdDNxdWtkY3czMWg1ciJ9.ceaKeSGntwx0hwyZdLfF4g';
-    // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //   maxZoom: 18,
-    //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    // }).addTo(map);
-    L.tileLayer(
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    })
+    var mapbox = L.tileLayer(
       'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
         maxZoom: 18,
         attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a>'
     }).addTo(map);
+    var baselayers = {
+      "OpenStreetMap": osm,
+      "MapBox": mapbox
+    };
     L.control.attribution({
       position: trySetting('_mapAttribution', 'bottomright')
     }).addTo(map);
+    return baselayers
   }
 
 
@@ -516,17 +520,6 @@ $(window).on('load', function() {
    */
   function getSetting(s) {
     return documentSettings[constants[s]];
-  }
-
-  /**
-   * Returns the value of a setting s
-   * getSetting(s) is equivalent to documentSettings[constants.s]
-   */
-  function getPolygonSetting(p, s) {
-    if (polygonSettings[p]) {
-      return polygonSettings[p][constants[s]];
-    }
-    return false;
   }
 
   /**
@@ -618,7 +611,6 @@ $(window).on('load', function() {
         ).done(function(options, points) {
           
           // load data
-          console.log("loading map")
           onMapDataLoad( parse(options), parse(points))
 
         })

@@ -4,7 +4,7 @@ Map Title,CAVElab Fieldwork Metadata,Insert your map title. Always appears in br
 Map Subtitle,,Add context (or leave blank)
 Display Title,topleft,"Select position to display map title, or off"
 Author Name,,"Appears in credits as ""View data by..."" (or leave blank)"
-Author Email or Website,http://gedi.umd.edu/,Insert your email or web address to appear as link in Author Name (or leave blank)
+Author Email or Website,,Insert your email or web address to appear as link in Author Name (or leave blank)
 Author Code Repo,,"Insert your code repo URL to appear as link in ""View code..."" (or leave blank)"
 Author Code Credit,,"Appears in credits as ""...code by..."" (or leave blank)"
 Google Analytics Tracking ID,,General format: UA-5488840-29
