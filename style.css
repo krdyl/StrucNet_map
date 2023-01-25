@@ -312,3 +312,8 @@ span.legend-icon {
 .ladder form, .ladder div {
   display: block;
 }
+
+.leaflet-popup-tip {
+  border: 0px;
+  padding:0px;
+}
