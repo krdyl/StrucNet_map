@@ -1,0 +1,11 @@
+Name,Datetime,Longitude,Latitude,Protocol,Area,Group,Instrument,Angular Resolution,Pulse Rate,Light,Wind,Survey Control,Description,Open,Image,QSM
+NO_ME_T2,2018-06-24T00:00:00,9.1,62.9,edge_core_transect_100m_5scans,0,Ghent University,RIEGL VZ400,0.04,300,unknown,none,tilt_upright,Deciduous forest;approximate location,contact:kim.calders@ugent.be;Pieter.DeFrenne@UGent.be,,No
+NO_ME_T3,2018-06-24T00:00:00,9.1,62.9,edge_core_transect_100m_5scans,0,Ghent University,RIEGL VZ400,0.04,300,unknown,none,tilt_upright,Deciduous forest;approximate location,contact:kim.calders@ugent.be;Pieter.DeFrenne@UGent.be,,No
+OliverCreek,2018-08-04T00:00:00,145.441194,-16.136139,uniform10m_0.5ha,0.5,Ghent University,RIEGL VZ400,0.04,300,unknown,none,multiple_targets,Wet Tropics,contact:kim.calders@ugent.be,,Yes
+Pastoorsbos,2018-02-19T00:00:00,4.545,51.3919,uniform_20m_0.48ha,0.48,Ghent University,RIEGL VZ1000,0.04,300,unknown,none,multiple_targets,temperate broadleaf,contact:miro.demol@uantwerpen.be;miro.demol@ugent.be,,Yes
+PO_LO_T1,2018-05-31T00:00:00,18.9,50.7,edge_core_transect_100m_5scans,0,Ghent University,RIEGL VZ400,0.04,300,unknown,none,tilt_upright,Deciduous forest;approximate location,contact:kim.calders@ugent.be;Pieter.DeFrenne@UGent.be,,No
+PO_LO_T2,2018-05-31T00:00:00,18.8,50.7,edge_core_transect_100m_5scans,0,Ghent University,RIEGL VZ400,0.04,300,unknown,none,tilt_upright,Deciduous forest;approximate location,contact:kim.calders@ugent.be;Pieter.DeFrenne@UGent.be,,No
+PO_LO_T3,2018-05-31T00:00:00,18.9,50.7,edge_core_transect_100m_5scans,0,Ghent University,RIEGL VZ400,0.04,300,unknown,none-light,tilt_upright,Deciduous forest;approximate location,contact:kim.calders@ugent.be;Pieter.DeFrenne@UGent.be,,No
+ROB06,2018-07-28T00:00:00,145.634,-17.121,uniform10m_1ha,1,Ghent University,RIEGL VZ400,0.04,300,unknown,none-light,multiple_targets,Wet Tropics,contact:kim.calders@ugent.be,,No
+Dassenbos,2017-01-01T00:00:00,5.65555556,51.98277778,4_single_locations,0,Wageningen University,RIEGL VZ400,0.06,300,unknown,unknown,tilt_upright,"Deciduous forest, phenology monitoring throughout year",contact:kim.calders@ugent.be,,No
+Dassenbos,2018-01-01T00:00:00,5.65555556,51.98277778,4_single_locations,0,Wageningen University,RIEGL VZ400,0.06,300,unknown,unknown,tilt_upright,"Deciduous forest, phenology monitoring throughout year",contact:kim.calders@ugent.be,,No
