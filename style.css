@@ -313,7 +313,15 @@ span.legend-icon {
   display: block;
 }
 
+.leaflet-popup-tip-container {
+  left: 2px;
+  top: -1px;
+}
 .leaflet-popup-tip {
-  border: 0px;
-  padding:0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fff;
+  background: transparent;
+  transform: none;
+  padding:0;
 }

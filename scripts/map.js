@@ -131,20 +131,21 @@ $(window).on('load', function() {
       if (point.Latitude !== '' && point.Longitude !== '') {
         var marker = L.marker([point.Latitude, point.Longitude], {icon: icon})
           .bindPopup('<b>Name: ' + point['Name'] + '</b><br>' +
-          'Group: ' + point['Group'] + '<br>' +
-          'Datetime: ' + point['Datetime'] + '<br>' +
-          'Protocol: ' + point['Protocol'] + '<br>' +
-          'Area: ' + point['Area'] + '<br>' +
-          'Instrument: ' + point['Instrument'] + '<br>' +
-          'Angular resolution: ' + point['Angular Resolution'] + '<br>' +
-          'Pulse rate: ' + point['Pulse Rate'] + '<br>' +
-          'Light: ' + point['Light'] + '<br>' +
-          'Wind: ' + point['Wind'] + '<br>' +
-          'Survey control: ' + point['Survey Control'] + '<br>' +
-          'QSM: ' + point['QSM'] + '<br>' +
-          'Open data: ' + point['Open'] + '<br>' +
-          (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
-          'Description: ' + point['Description']);
+                  'Group: ' + point['Group'] + '<br>' +
+                  'Datetime: ' + point['Datetime'] + '<br>' +
+                  'Protocol: ' + point['Protocol'] + '<br>' +
+                  'Area: ' + point['Area'] + '<br>' +
+                  'Instrument: ' + point['Instrument'] + '<br>' +
+                  'Angular resolution: ' + point['Angular Resolution'] + '<br>' +
+                  'Pulse rate: ' + point['Pulse Rate'] + '<br>' +
+                  'Light: ' + point['Light'] + '<br>' +
+                  'Wind: ' + point['Wind'] + '<br>' +
+                  'Survey control: ' + point['Survey Control'] + '<br>' +
+                  'QSM: ' + point['QSM'] + '<br>' +
+                  'Open data: ' + point['Open'] + '<br>' +
+                  (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
+                  'Description: ' + point['Description']
+              );
 
         if (layers !== undefined && layers.length !== 1) {
           marker.addTo(layers[point.Group]);
@@ -195,7 +196,7 @@ $(window).on('load', function() {
     // add title
 
     // TODO: seperate TLS data and other fieldwork data in two groups and get them their own toggleboxes (hard)
-    
+
     // $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
     // if (getSetting('_pointsLegendIcon') != '') {
     //   $('#points-legend h6').prepend('<span class="legend-icon"><i class="fas '
@@ -379,8 +380,6 @@ $(window).on('load', function() {
     // Append icons to categories in markers legend
     $('#points-legend .leaflet-control-layers-overlays span').each(function(i) {
       var g = $(this).text().trim();
-      console.log(group2color)
-      console.log(group2color[ g ].indexOf('.'))
       var legendIcon = (group2color[ g ].indexOf('.') > 0)
         ? '<img src="' + group2color[ g ] + '" class="markers-legend-icon" style="width:30px;height:30px;">'
         : '&nbsp;<i class="fas fa-map-marker" style="color: '
