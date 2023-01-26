@@ -180,8 +180,7 @@ $(window).on('load', function() {
     var pos = (getSetting('_pointsLegendPos') == 'off') ? 'topleft' : getSetting('_pointsLegendPos');
   
 
-    // TODO: adding baselayers for OSM and sattelite here breaks stuff
-    var pointsLegend = L.control.layers(null, layers, {
+    var pointsLegend = L.control.layers(baselayers, layers, {
       collapsed: false,
       position: pos,
     });
@@ -192,11 +191,16 @@ $(window).on('load', function() {
       pointsLegend._container.className += ' ladder';
     }
 
-    $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
-    if (getSetting('_pointsLegendIcon') != '') {
-      $('#points-legend h6').prepend('<span class="legend-icon"><i class="fas '
-        + getSetting('_pointsLegendIcon') + '"></i></span>');
-    }
+
+    // add title
+
+    // TODO: seperate TLS data and other fieldwork data in two groups and get them their own toggleboxes (hard)
+    
+    // $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
+    // if (getSetting('_pointsLegendIcon') != '') {
+    //   $('#points-legend h6').prepend('<span class="legend-icon"><i class="fas '
+    //     + getSetting('_pointsLegendIcon') + '"></i></span>');
+    // }
 
     var displayTable = getSetting('_displayTable') == 'on' ? true : false;
 
@@ -288,6 +292,7 @@ $(window).on('load', function() {
    */
   function onMapDataLoad(options, points) {
 
+    // get settings from file into dictionary
     createDocumentSettings(options);
 
     document.title = getSetting('_mapTitle');
@@ -305,6 +310,7 @@ $(window).on('load', function() {
 
     centerAndZoomMap(group);
 
+    // move daylight on action
     var terminator = L.terminator().addTo(map);
     map.addEventListener('zoomstart movestart popupopen', function(e) {
     	terminator.setTime();
@@ -371,14 +377,16 @@ $(window).on('load', function() {
     changeAttribution();
 
     // Append icons to categories in markers legend
-    $('#points-legend label span').each(function(i) {
+    $('#points-legend .leaflet-control-layers-overlays span').each(function(i) {
       var g = $(this).text().trim();
+      console.log(group2color)
+      console.log(group2color[ g ].indexOf('.'))
       var legendIcon = (group2color[ g ].indexOf('.') > 0)
-        ? '<img src="' + group2color[ g ] + '" class="markers-legend-icon">'
+        ? '<img src="' + group2color[ g ] + '" class="markers-legend-icon" style="width:30px;height:30px;">'
         : '&nbsp;<i class="fas fa-map-marker" style="color: '
           + group2color[ g ]
           + '"></i>';
-      //$(this).prepend(legendIcon);
+      $(this).append(legendIcon);
     });
 
     // When all processing is done, hide the loader and make the map visible
@@ -428,9 +436,12 @@ $(window).on('load', function() {
     var dispTitle = getSetting('_mapTitleDisplay');
 
     if (dispTitle !== 'off') {
-      // var title = '<h3 class="pointer">' + getSetting('_mapTitle') + '</h3>';
-      var title = '<img src="media/cavelab.png" alt="CAVElab Metadata" width="180" height="110">';
-      var subtitle = '' //'<h5>' + getSetting('_mapSubtitle') + '</h5>';
+      //ar title = '<h3 class="pointer">' + getSetting('_mapTitle') + '</h3>';
+      // show image instead of title
+      var title = '<img src="media/cavelab.png" alt="CAVElab Metadata" width="180" height="170">';
+      //var subtitle = '<h5>' + getSetting('_mapSubtitle') + '</h5>';
+      // no subtitle
+      var subtitle = ''
 
       if (dispTitle == 'topleft') {
         $('div.leaflet-top').prepend('<div class="map-title leaflet-bar leaflet-control leaflet-control-custom">' + title + subtitle + '</div>');
@@ -502,14 +513,17 @@ $(window).on('load', function() {
       'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
         maxZoom: 18,
         attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a>'
-    }).addTo(map);
+    })
     var baselayers = {
       "OpenStreetMap": osm,
       "MapBox": mapbox
     };
+    // show attributes on position defined in settings
     L.control.attribution({
       position: trySetting('_mapAttribution', 'bottomright')
     }).addTo(map);
+    // show openstreetmap layer by default
+    osm.addTo(map);
     return baselayers
   }
 
@@ -538,62 +552,13 @@ $(window).on('load', function() {
    * Triggers the load of the spreadsheet and map creation
    */
 
-   // Google Sheets URL
-   var googleDocMetadataURL = 'https://docs.google.com/spreadsheets/d/1d5BlpZQ3l2tTOqfxvRQB_TvKZdPM8x2qjjqTn0gRz7g/edit#gid=0';
-   var googleDocConfigURL = 'https://docs.google.com/spreadsheets/d/1CdEG2zkD8NaZ6b2su85-_FpKemJs_eoS0fKFEB49SKk/edit#gid=1284643617';
-
-   // Google Sheets API key
-   var googleApiKey = 'AIzaSyDanPnCLHaibRMiGUbOERi40ElVTsMPhZY';
-
    var mapData;
 
    $.ajax({
        url:'./csv/cavelab-metadata-config-options.csv',
        type:'HEAD',
        error: function() {
-         // Options.csv does not exist in the root level, so use Tabletop to fetch data from
-         // the Google sheet
-
-         if (typeof googleApiKey !== 'undefined' && googleApiKey) {
-
-          var parse = function(res) {
-            return Papa.parse(Papa.unparse(res[0].values), {header: true, skipEmptyLines:true} ).data;
-          }
-
-          var apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/'
-          var configspreadsheetId = googleDocConfigURL.indexOf('/d/') > 0
-            ? googleDocConfigURL.split('/d/')[1].split('/')[0]
-            : googleDocConfigURL
-          var metadataspreadsheetId = googleDocMetadataURL.indexOf('/d/') > 0
-            ? googleDocMetadataURL.split('/d/')[1].split('/')[0]
-            : googleDocMetadataURL
-
-          $.getJSON(
-            apiUrl + configspreadsheetId + '?key=' + googleApiKey
-          ).then(function(data) {
-              var sheets = data.sheets.map(function(o) { return o.properties.title })
-
-              if (sheets.length === 0 || !sheets.includes('Options')) {
-                'Could not load data from the Google Sheet'
-              }
-
-              // First, read 3 sheets: Options, Points, and Polylines
-              $.when(
-                $.getJSON(apiUrl + configspreadsheetId + '/values/Options?key=' + googleApiKey),
-                $.getJSON(apiUrl + metadataspreadsheetId + '/values/TLS-Metadata?key=' + googleApiKey)
-              ).done(function(options, points) {
-
-                // load data
-                onMapDataLoad( parse(options), parse(points))
-              })
-
-            }
-          )
-
-         } else {
-          alert('You cannot load data from a Google Sheet, you need to add a free Google API key')
-         }
-
+         console.log("CSV file not found!")
        },
 
        /*
