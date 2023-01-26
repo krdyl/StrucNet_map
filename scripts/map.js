@@ -144,7 +144,10 @@ $(window).on('load', function() {
                   'QSM: ' + point['QSM'] + '<br>' +
                   'Open data: ' + point['Open'] + '<br>' +
                   (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
-                  'Description: ' + point['Description']
+                  'Description: ' + point['Description'],
+                  {
+                    closeButton: true
+                  }
               );
 
         if (layers !== undefined && layers.length !== 1) {
@@ -297,6 +300,8 @@ $(window).on('load', function() {
     createDocumentSettings(options);
 
     document.title = getSetting('_mapTitle');
+
+    // Add base satellite and street layers
     baselayers = addBaseMap();
 
     // Add point markers to the map
@@ -309,47 +314,53 @@ $(window).on('load', function() {
       completePoints = true;
     }
 
+    // Center point on map
     centerAndZoomMap(group);
 
-    // move daylight on action
+    // Add daylight indicator and move on action
     var terminator = L.terminator().addTo(map);
     map.addEventListener('zoomstart movestart popupopen', function(e) {
     	terminator.setTime();
     });
 
-    // Add Nominatim Search control
+    // Add Search bar
     if (getSetting('_mapSearch') !== 'off') {
-      var geocoder = L.Control.geocoder({
-        expand: 'click',
-        position: getSetting('_mapSearch'),
+      try {
+        var geocoder = L.Control.geocoder({
+          expand: 'click',
+          position: getSetting('_mapSearch'),
+          defaultMarkGeocode: false,
+          expanded: true,
+        })
+        .on('markgeocode', function(e) {
+          var bbox = e.geocode.bbox;
+          var poly = L.polygon([
+            bbox.getSouthEast(),
+            bbox.getNorthEast(),
+            bbox.getNorthWest(),
+            bbox.getSouthWest()
+          ])
+          map.flyToBounds(poly.getBounds());
+        }).addTo(map);
 
-        geocoder: L.Control.Geocoder.nominatim({
-          geocodingQueryParams: {
-            viewbox: '',  // by default, viewbox is empty
-            bounded: 1,
-          }
-        }),
-      }).addTo(map);
-
-      function updateGeocoderBounds() {
-        var bounds = map.getBounds();
-        geocoder.options.geocoder.options.geocodingQueryParams.viewbox = [
-            bounds._southWest.lng, bounds._southWest.lat,
-            bounds._northEast.lng, bounds._northEast.lat
-          ].join(',');
+      } catch(error) {
+        console.error(error)
+        console.log("Likely gave an invalid Search button position in settings. Check config file, valid options are: topleft, topright, bottomleft, bottomright.")
       }
-
-      // Update search viewbox coordinates every time the map moves
-      map.on('moveend', updateGeocoderBounds);
     }
 
-    // Add location control
+    // Add show your location button
     if (getSetting('_mapMyLocation') !== 'off') {
-      var locationControl = L.control.locate({
-        keepCurrentZoomLevel: true,
-        returnToPrevBounds: true,
-        position: getSetting('_mapMyLocation')
-      }).addTo(map);
+      try {
+        var locationControl = L.control.locate({
+          keepCurrentZoomLevel: true,
+          returnToPrevBounds: true,
+          position: getSetting('_mapMyLocation')
+        }).addTo(map);
+      } catch (error) {
+        console.error(error)
+        console.log("Likely gave an invalid Location button position in settings. Check config file, valid options are: topleft, topright, bottomleft, bottomright.")
+      }
     };
 
     // Add zoom reset control
@@ -367,9 +378,15 @@ $(window).on('load', function() {
         icon: 'fa-globe'}]
     }).addTo(map);
 
+   
     // Add zoom control
     if (getSetting('_mapZoom') !== 'off') {
-      L.control.zoom({position: getSetting('_mapZoom')}).addTo(map);
+      try {
+        L.control.zoom({position: getSetting('_mapZoom')}).addTo(map);
+      } catch(error) {
+        console.error(error)
+        console.log("Likely gave an invalid Zoom button position in settings. Check config file, valid options are: topleft, topright, bottomleft, bottomright.")
+      }
     };
 
     addTitle();
@@ -571,7 +588,7 @@ $(window).on('load', function() {
 
         $.when(
           $.get('./csv/cavelab-metadata-config-options.csv'),
-          $.get('./csv/cavelab-metadata.csv')
+          $.get('./csv/cavelab-metadata.backup.csv')
         ).done(function(options, points) {
           
           // load data

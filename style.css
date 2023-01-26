@@ -325,3 +325,11 @@ span.legend-icon {
   transform: none;
   padding:0;
 }
+.leaflet-container a.leaflet-popup-close-button {
+  color: black;
+  width: 30px;
+  height: 30px;
+  text-indent: 0;
+  font-size: 20px;
+  padding: 5px 5px 0px 0px;
+}

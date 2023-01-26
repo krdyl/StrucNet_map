@@ -15,10 +15,10 @@ Initial Zoom,,Leave blank to auto-zoom to display all markers (or insert number 
 Initial Center Latitude,,Leave blank to auto-center for all markers (or insert initial latitude)
 Initial Center Longitude,,Leave blank to auto-center for all markers (or insert initial longitude)
 Map Controls,,
-Search Button,off,Display the search box (magnifying glass)
+Search Button,topright,Display the search box (magnifying glass)
 Search Radius,5 miles,Select radius for results from Mapzen search
 Search Results Zoom Level,12,Select zoom level to display search results (larger = zoom in more)
-Show My Location,off,Display the Show My Location button (black marker)
+Show My Location,off,Display the Show My Location button
 Zoom Controls,topright,Display the Zoom Controls
 Credits and Attribution,bottomright,Display the credits
 Point Map Controls,,
