@@ -1,21 +1,7 @@
 $(window).on('load', function() {
   var documentSettings = {};
   var group2color = {};
-
   var completePoints = false;
-
-  /**
-   * Returns an Awesome marker with specified parameters
-   */
-  function createMarkerIcon(icon, prefix, markerColor, iconColor) {
-    return L.AwesomeMarkers.icon({
-      icon: icon,
-      prefix: prefix,
-      markerColor: markerColor,
-      iconColor: iconColor
-    });
-  }
-
 
   /**
    * Sets the map view so that all markers are visible, or
@@ -318,10 +304,10 @@ $(window).on('load', function() {
     centerAndZoomMap(group);
 
     // Add daylight indicator and move on action
-    var terminator = L.terminator().addTo(map);
-    map.addEventListener('zoomstart movestart popupopen', function(e) {
-    	terminator.setTime();
-    });
+    // var terminator = L.terminator().addTo(map);
+    // map.addEventListener('zoomstart movestart popupopen', function(e) {
+    // 	terminator.setTime();
+    // });
 
     // Add Search bar
     if (getSetting('_mapSearch') !== 'off') {
@@ -393,6 +379,10 @@ $(window).on('load', function() {
 
     // Change Map attribution to include author's info + urls
     changeAttribution();
+    // also change anytime base layer changes
+    map.on('baselayerchange', function(e) {
+      changeAttribution();
+    })
 
     // Append icons to categories in markers legend
     $('#points-legend .leaflet-control-layers-overlays span').each(function(i) {
@@ -435,9 +425,9 @@ $(window).on('load', function() {
         $('.loader').hide();
 
         // Open intro popup window in the center of the map
-        if (getSetting('_introPopupText') != '') {
-          initIntroPopup(getSetting('_introPopupText'), map.getCenter());
-        };
+        // if (getSetting('_introPopupText') != '') {
+        //   initIntroPopup(getSetting('_introPopupText'), map.getCenter());
+        // };
 
       } else {
         setTimeout(showMap, 50);
@@ -471,32 +461,12 @@ $(window).on('load', function() {
   }
 
 
-  function initIntroPopup(info, coordinates) {
-    // This is a pop-up for mobile device
-    if (window.matchMedia("only screen and (max-width: 760px)").matches) {
-      $('body').append('<div id="mobile-intro-popup"><p>' + info +
-        '</p><div id="mobile-intro-popup-close"><i class="fas fa-times"></i></div></div>');
-
-      $('#mobile-intro-popup-close').click(function() {
-        $("#mobile-intro-popup").hide();
-      });
-      return;
-    }
-
-    /* And this is a standard popup for bigger screens */
-    L.popup({className: 'intro-popup'})
-      .setLatLng(coordinates) // this needs to change
-      .setContent(info)
-      .openOn(map);
-  }
-
-
   /**
    * Changes map attribution (author, GitHub repo, email etc.) in bottom-right
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'University of Maryland' //'View <a href="' + googleDocURL + '" target="_blank">data</a>';
+    var credit = 'CAVElab, Ghent University'
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
 
@@ -509,7 +479,7 @@ $(window).on('load', function() {
       credit += ' | ';
     }
 
-    //credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
+    credit += 'View <a href="' + getSetting('_githubRepo') + '" target="_blank" rel="noopener noreferrer">code | </a>';
     if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
     //credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
