@@ -286,10 +286,9 @@ select {
 }
 
 span.legend-arrow {
-  color: rgb(238, 238, 238);
-  position: absolute;
-  right: 8px;
-  top: 5px;
+  color: rgb(115, 115, 115);
+  position: relative;
+  float:right;
 }
 
 span.legend-icon {
@@ -298,7 +297,7 @@ span.legend-icon {
 }
 
 .ladder {
-  width: 200px;
+  width: 180px;
   margin-top: 0 !important;
   overflow: hidden;
 }
@@ -307,6 +306,10 @@ span.legend-icon {
 .ladder h6.minimize ~ form,
 .ladder h6.minimize ~ section {
   display: none !important;
+}
+
+div.minimize label{
+  display:none !important;
 }
 
 .ladder form, .ladder div {

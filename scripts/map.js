@@ -55,16 +55,11 @@ $(window).on('load', function() {
       // We currently discern three types of data, if you want to add more add it to the switch case here and add an image to the type2icon dictionary on line 3.
       switch (type) {
         case "TLS":
-          console.log("TLS data at " + i)
-          break;
         case "Forest Census":
-          console.log("Forest Census data at " + i)
-          break;
         case "Other":
-          console.log("Other data found at " + i)
           break;
         default:
-          console.warn("ALERT: unidentified data type found, adding to Other type")
+          console.warn("ALERT: unidentified data type found, adding to Other type (point " + i + ")")
           points[i].Type = "Other"
           type = "Other"
       }
@@ -150,7 +145,7 @@ $(window).on('load', function() {
         markerArray.push(marker);
       }
     }
-
+ 
     var group = L.featureGroup(markerArray);
     var clusters = (getSetting('_markercluster') === 'on') ? true : false;
 
@@ -185,19 +180,16 @@ $(window).on('load', function() {
     if (getSetting('_pointsLegendPos') !== 'off') {
       pointsLegend.addTo(map);
       pointsLegend._container.id = 'points-legend';
-      pointsLegend._container.className += ' ladder';
     }
 
-
+    $(".leaflet-control-layers-list").addClass("ladder")
     // add title
-
-    // TODO: seperate TLS data and other fieldwork data in two groups and get them their own toggleboxes (hard)
-
-    // $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
-    // if (getSetting('_pointsLegendIcon') != '') {
-    //   $('#points-legend h6').prepend('<span class="legend-icon"><i class="fas '
-    //     + getSetting('_pointsLegendIcon') + '"></i></span>');
-    // }
+    if (getSetting('_pointsLegendTitle')) {
+      $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
+    }
+    // add titles to baselayers and overlay, these are clickable to make them collapse
+    $(".leaflet-control-layers-base").prepend("<h6 class='pointer'>Background</h6>");
+    $(".leaflet-control-layers-overlays").prepend("<h6 class='pointer'>Data types</h6>");
 
     var displayTable = getSetting('_displayTable') == 'on' ? true : false;
 
@@ -229,7 +221,7 @@ $(window).on('load', function() {
       function updateTable() {
         var pointsVisible = [];
         for (i in points) {
-          if (map.hasLayer(layers[points[i].Group]) &&
+          if (map.hasLayer(layers[points[i].Type]) &&
               map.getBounds().contains(L.latLng(points[i].Latitude, points[i].Longitude))) {
             pointsVisible.push(points[i]);
           }
@@ -407,26 +399,27 @@ $(window).on('load', function() {
 
     function showMap() {
       if (completePoints) {
-        $('.ladder h6').append('<span class="legend-arrow"><i class="fas fa-chevron-down"></i></span>');
-        $('.ladder h6').addClass('minimize');
 
+        // add an arrow to both base layers title and overlay layers title
+        $('.ladder h6').append('<span class="legend-arrow"><i class="fas fa-chevron-up"></i></span>');
+
+        // on click: minimize only this section, independent of rest of legend
         $('.ladder h6').click(function() {
-          if ($(this).hasClass('minimize')) {
-            $('.ladder h6').addClass('minimize');
-            $('.legend-arrow i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-            $(this).removeClass('minimize')
-              .parent().find('.legend-arrow i')
+          parentDiv = $(this).parent()
+          if (parentDiv.hasClass('minimize')) {
+            parentDiv.removeClass('minimize')
+              .find('.legend-arrow i')
               .removeClass('fa-chevron-down')
               .addClass('fa-chevron-up');
           } else {
-            $(this).addClass('minimize');
-            $(this).parent().find('.legend-arrow i')
+            parentDiv.addClass('minimize');
+            parentDiv.find('.legend-arrow i')
               .removeClass('fa-chevron-up')
               .addClass('fa-chevron-down');
           }
         });
 
-        $('.ladder h6').first().click();
+        // $('.ladder h6').first().click();
 
         $('#map').css('visibility', 'visible');
         $('.loader').hide();

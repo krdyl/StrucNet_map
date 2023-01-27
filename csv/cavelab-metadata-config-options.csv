@@ -22,7 +22,7 @@ Show My Location,off,Display the Show My Location button
 Zoom Controls,topright,Display the Zoom Controls
 Credits and Attribution,bottomright,Display the credits
 Point Map Controls,,
-Point Legend Title,TLS Network,Show title at top of Points legend (or leave blank)
+Point Legend Title,,Show title at top of Points legend (or leave blank)
 Point Legend Position,topleft,Display the Points legend
 Point Legend Icon,,Insert a Font Awesome free and solid icon name (example: fa-bus) or any Material Design icon name (example: rowing) or leave blank
 Table Controls,,
