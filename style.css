@@ -311,6 +311,14 @@ span.legend-icon {
 div.minimize label{
   display:none !important;
 }
+.ladder label {
+  font-size: 15px;
+}
+.ladder h4 {
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 0 5px;
+}
 
 .ladder form, .ladder div {
   display: block;

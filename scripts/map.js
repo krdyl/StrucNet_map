@@ -59,7 +59,7 @@ $(window).on('load', function() {
         case "Other":
           break;
         default:
-          console.warn("ALERT: unidentified data type found, adding to Other type (point " + i + ")")
+          console.warn("ALERT: unidentified data type found (" + type + "), adding to Other type (point " + i + ")")
           points[i].Type = "Other"
           type = "Other"
       }
@@ -90,52 +90,28 @@ $(window).on('load', function() {
     // check that map has loaded before adding points to it?
     for (var i in points) {
       var point = points[i];
+      // extract month from starting date
+      point.Month = point['Start Date'].substring(0,7)
 
-      // If icon contains '.', assume it's a path to a custom icon,
-      // otherwise create a Font Awesome icon
-      //var iconSize = point['Custom Size'];
-      //var size = (iconSize.indexOf('x') > 0)
-      //  ? [parseInt(iconSize.split('x')[0]), parseInt(iconSize.split('x')[1])]
-      //  : [32, 32];
       var size = [60, 60];
 
       var anchor = [size[0] / 2, size[1] / 2];
 
       var icon = L.icon({
-          iconUrl: 'media/aus_tls_sites_display.png',
+          iconUrl: type2icon[point.Type],
           iconSize: size,
           iconAnchor: anchor
       });
 
-      //var icon = (point['Marker Icon'].indexOf('.') > 0)
-      //  ? L.icon({
-      //    iconUrl: point['Marker Icon'],
-      //    iconSize: size,
-      //    iconAnchor: anchor
-      //  })
-      //  : createMarkerIcon(point['Marker Icon'],
-      //    'fa',
-      //    point['Marker Color'].toLowerCase(),
-      //    point['Icon Color']
-      //  );
-
       if (point.Latitude !== '' && point.Longitude !== '') {
         var marker = L.marker([point.Latitude, point.Longitude], {icon: icon})
-          .bindPopup('<b>Name: ' + point['Name'] + '</b><br>' +
-                  'Group: ' + point['Group'] + '<br>' +
-                  'Datetime: ' + point['Datetime'] + '<br>' +
+          .bindPopup('<b>Plot Name: ' + point['Plot Name'] + '</b><br>' +
+                  'Data type: ' + point['Type'] + '<br>' +
+                  'Month: ' + point['Month'] + '<br>' +
                   'Protocol: ' + point['Protocol'] + '<br>' +
-                  'Area: ' + point['Area'] + '<br>' +
                   'Instrument: ' + point['Instrument'] + '<br>' +
-                  'Angular resolution: ' + point['Angular Resolution'] + '<br>' +
-                  'Pulse rate: ' + point['Pulse Rate'] + '<br>' +
-                  'Light: ' + point['Light'] + '<br>' +
-                  'Wind: ' + point['Wind'] + '<br>' +
-                  'Survey control: ' + point['Survey Control'] + '<br>' +
-                  'QSM: ' + point['QSM'] + '<br>' +
-                  'PI: ' + point['Open'] + '<br>' +
-                  (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
-                  'Description: ' + point['Description']
+                  'Lead Investigator: ' + point['Lead Investigator'] + '<br>' +
+                  'Forest type: ' + point['Forest type']
               );
 
         if (layers !== undefined && layers.length !== 1) {
@@ -185,11 +161,11 @@ $(window).on('load', function() {
     $(".leaflet-control-layers-list").addClass("ladder")
     // add title
     if (getSetting('_pointsLegendTitle')) {
-      $('#points-legend').prepend('<h6 class="pointer">' + getSetting('_pointsLegendTitle') + '</h6>');
+      $('#points-legend').prepend('<h4 class="pointer">' + getSetting('_pointsLegendTitle') + '</h4>');
     }
     // add titles to baselayers and overlay, these are clickable to make them collapse
-    $(".leaflet-control-layers-base").prepend("<h6 class='pointer'>Background</h6>");
-    $(".leaflet-control-layers-overlays").prepend("<h6 class='pointer'>Data types</h6>");
+    $(".leaflet-control-layers-base").prepend("<h4 class='pointer'>Background</h4>");
+    $(".leaflet-control-layers-overlays").prepend("<h4 class='pointer'>Data types</h4>");
 
     var displayTable = getSetting('_displayTable') == 'on' ? true : false;
 
@@ -401,10 +377,10 @@ $(window).on('load', function() {
       if (completePoints) {
 
         // add an arrow to both base layers title and overlay layers title
-        $('.ladder h6').append('<span class="legend-arrow"><i class="fas fa-chevron-up"></i></span>');
+        $('.ladder h4').append('<span class="legend-arrow"><i class="fas fa-chevron-up"></i></span>');
 
         // on click: minimize only this section, independent of rest of legend
-        $('.ladder h6').click(function() {
+        $('.ladder h4').click(function() {
           parentDiv = $(this).parent()
           if (parentDiv.hasClass('minimize')) {
             parentDiv.removeClass('minimize')
@@ -419,15 +395,8 @@ $(window).on('load', function() {
           }
         });
 
-        // $('.ladder h6').first().click();
-
         $('#map').css('visibility', 'visible');
         $('.loader').hide();
-
-        // Open intro popup window in the center of the map
-        // if (getSetting('_introPopupText') != '') {
-        //   initIntroPopup(getSetting('_introPopupText'), map.getCenter());
-        // };
 
       } else {
         setTimeout(showMap, 50);
@@ -501,8 +470,8 @@ $(window).on('load', function() {
         attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a>'
     })
     var baselayers = {
-      "OpenStreetMap": osm,
-      "MapBox": mapbox
+      "Streets": osm,
+      "Satellite": mapbox
     };
     // show attributes on position defined in settings
     L.control.attribution({
@@ -569,9 +538,8 @@ $(window).on('load', function() {
 
         $.when(
           $.get('./csv/cavelab-metadata-config-options.csv'),
-          $.get('./csv/cavelab-metadata.csv')
+          $.get('./csv/cavelab-data.csv')
         ).done(function(options, points) {
-          
           // load data
           onMapDataLoad( parse(options), parse(points))
 
