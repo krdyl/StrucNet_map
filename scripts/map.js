@@ -1,6 +1,6 @@
 $(window).on('load', function() {
   var documentSettings = {};
-  var group2color = {};
+  var type2icon = {TLS: 'media/aus_tls_sites_display.png', 'Forest Census': 'media/placeholder.png', Other: 'media/placeholder.png'};
   var completePoints = false;
 
   /**
@@ -47,29 +47,39 @@ $(window).on('load', function() {
    * column in the spreadsheet.
    */
   function determineLayers(points) {
-    var groups = [];
+    var types = [];
     var layers = {};
 
     for (var i in points) {
-      var group = points[i].Group;
-      if (group && groups.indexOf(group) === -1) {
-        // Add group to groups
-        groups.push(group);
-
-        // Add color to the crosswalk
-        group2color[ group ] = 'media/aus_tls_sites_display.png'
-        //group2color[ group ] = points[i]['Marker Icon'].indexOf('.') > 0
-        //  ? points[i]['Marker Icon']
-        //  : points[i]['Marker Color'];
+      var type = points[i].Type;
+      // We currently discern three types of data, if you want to add more add it to the switch case here and add an image to the type2icon dictionary on line 3.
+      switch (type) {
+        case "TLS":
+          console.log("TLS data at " + i)
+          break;
+        case "Forest Census":
+          console.log("Forest Census data at " + i)
+          break;
+        case "Other":
+          console.log("Other data found at " + i)
+          break;
+        default:
+          console.warn("ALERT: unidentified data type found, adding to Other type")
+          points[i].Type = "Other"
+          type = "Other"
+      }
+      if (type && types.indexOf(type) === -1) {
+        // Add type
+        types.push(type);
       }
     }
 
     // if none of the points have named layers, return no layers
-    if (groups.length === 0) {
+    if (types.length === 0) {
       layers = undefined;
     } else {
-      for (var i in groups) {
-        var name = groups[i];
+      for (var i in types) {
+        var name = types[i];
         layers[name] = L.layerGroup();
         layers[name].addTo(map);
       }
@@ -128,16 +138,13 @@ $(window).on('load', function() {
                   'Wind: ' + point['Wind'] + '<br>' +
                   'Survey control: ' + point['Survey Control'] + '<br>' +
                   'QSM: ' + point['QSM'] + '<br>' +
-                  'Open data: ' + point['Open'] + '<br>' +
+                  'PI: ' + point['Open'] + '<br>' +
                   (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
-                  'Description: ' + point['Description'],
-                  {
-                    closeButton: true
-                  }
+                  'Description: ' + point['Description']
               );
 
         if (layers !== undefined && layers.length !== 1) {
-          marker.addTo(layers[point.Group]);
+          marker.addTo(layers[point.Type]);
         }
 
         markerArray.push(marker);
@@ -386,11 +393,11 @@ $(window).on('load', function() {
 
     // Append icons to categories in markers legend
     $('#points-legend .leaflet-control-layers-overlays span').each(function(i) {
-      var g = $(this).text().trim();
-      var legendIcon = (group2color[ g ].indexOf('.') > 0)
-        ? '<img src="' + group2color[ g ] + '" class="markers-legend-icon" style="width:30px;height:30px;">'
+      var type = $(this).text().trim();
+      var legendIcon = (type2icon[ type ].indexOf('.') > 0)
+        ? '<img src="' + type2icon[ type ] + '" class="markers-legend-icon" style="width:30px;height:30px;">'
         : '&nbsp;<i class="fas fa-map-marker" style="color: '
-          + group2color[ g ]
+          + group2color[ type ]
           + '"></i>';
       $(this).append(legendIcon);
     });
@@ -535,11 +542,22 @@ $(window).on('load', function() {
   }
 
   /**
-   * Triggers the load of the spreadsheet and map creation
+   * Reformulates documentSettings as a dictionary, e.g.
+   * {"webpageTitle": "Leaflet Boilerplate", "infoPopupText": "Stuff"}
    */
+  function createDocumentSettings(settings) {
+    for (var i in settings) {
+      var setting = settings[i];
+      documentSettings[setting.Setting] = setting.Customize;
+    }
+  }
 
-   var mapData;
 
+  /**
+   * Triggers the load of the spreadsheet and map creation
+   * 
+   * Can change here to Sharepoint API or csv on share if ever desired
+   */
    $.ajax({
        url:'./csv/cavelab-metadata-config-options.csv',
        type:'HEAD',
@@ -558,7 +576,7 @@ $(window).on('load', function() {
 
         $.when(
           $.get('./csv/cavelab-metadata-config-options.csv'),
-          $.get('./csv/cavelab-metadata.backup.csv')
+          $.get('./csv/cavelab-metadata.csv')
         ).done(function(options, points) {
           
           // load data
@@ -569,15 +587,5 @@ $(window).on('load', function() {
        }
    });
 
-  /**
-   * Reformulates documentSettings as a dictionary, e.g.
-   * {"webpageTitle": "Leaflet Boilerplate", "infoPopupText": "Stuff"}
-   */
-  function createDocumentSettings(settings) {
-    for (var i in settings) {
-      var setting = settings[i];
-      documentSettings[setting.Setting] = setting.Customize;
-    }
-  }
 
 });
