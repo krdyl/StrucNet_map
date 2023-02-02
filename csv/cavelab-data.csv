@@ -1,3 +1,107 @@
 Type,Plot Name,Start Date,Longitude,Latitude,Protocol,Instrument,Timeseries,Lead Investigator,Forest type
-TLS,TEST1,2023-01-01,10.2,10.2,Protocol,RIEGL VZ400,No,Wout Cherlet,Tropical
-Forest Census,FC,2023-01-25,2.04444,20,FC_PROT,RIEGL VZ400i,"Yes, 5 times over 3 years",Kim Calders,Outside forest
+TLS,DRO_CRANE,Aug-18,145.446111,-16.1028167,uniform10m_1ha + above panels,RIEGL VZ400,No,Kim Calders,Wet Tropics
+TLS,Litchfield,Aug-18,130.794429,-13.179233,uniform25m_1ha,RIEGL VZ400,No,Kim Calders,Tropical Savanna
+TLS,OliverCreek,Aug-18,145.441194,-16.136139,uniform10m_0.5ha,RIEGL VZ400,No,Kim Calders,Wet Tropics
+TLS,ROB06,Jul-18,145.634,-17.121,uniform10m_1ha,RIEGL VZ400,No,Kim Calders,Wet Tropics
+TLS,ROB17,Jul-18,145.634,-17.121,uniform10m_1ha,RIEGL VZ400,No,Kim Calders,Wet Tropics
+TLS,Dassenbos,Mar-14,5.65555556,51.98277778,4_single_locations,RIEGL VZ400,Yes - 2014-2018,Kim Calders (collaboration with WUR),Temperate broadleaf
+TLS,BE_HI_T1,Jul-18,5.9,50.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_HI_T2,Jul-18,5.9,50.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_HI_T3,Jul-18,5.9,50.8,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_LO_T1,Jul-18,3.8,51.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_LO_T2,Jul-18,3.9,51.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_LO_T3,Jul-18,3.8,51.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_ME_T1,Jul-18,5.3,50.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_ME_T2,Jul-18,5.3,50.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,BE_ME_T3,Jul-18,5.3,50.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,CS_LO_T1,Jun-18,17.6,59.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,CS_LO_T2,Jun-18,17.1,59.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,CS_LO_T3,Jun-18,17.2,59.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,GE_LO_T1,May-18,8.7,53.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,GE_LO_T2,May-18,8.7,53.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,GE_LO_T3,May-18,8.6,53.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_HI_T1,May-18,11.7,43.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_HI_T2,May-18,11,43.4,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_HI_T3,May-18,11.7,43.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_LO_T1,May-18,11.2,43.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_LO_T2,May-18,11.2,43.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_LO_T3,May-18,11.2,43.3,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_ME_T1,May-18,11,43.5,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_ME_T2,May-18,11,43.4,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,IT_ME_T3,May-18,11,43.4,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NF_LO_T1,Jun-18,2.8,49.6,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NF_LO_T2,Jun-18,2.9,49.6,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NF_LO_T3,Jun-18,3,49.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_HI_T1,Jun-18,9.4,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_HI_T2,Jun-18,9.4,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_HI_T3,Jun-18,9.4,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_LO_T1,Jun-18,10.1,63.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_LO_T2,Jun-18,10.2,63.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_LO_T3,Jun-18,9.9,63.8,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_ME_T1,Jun-18,9.1,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_ME_T2,Jun-18,9.1,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,NO_ME_T3,Jun-18,9.1,62.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,PO_LO_T1,May-18,18.9,50.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,PO_LO_T2,May-18,18.8,50.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,PO_LO_T3,May-18,18.9,50.7,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SS_LO_T1,Jun-18,13.3,56,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SS_LO_T2,Jun-18,13.4,56.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SS_LO_T3,Jun-18,13.4,56.1,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SW_LO_T1,May-18,8.6,47.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SW_LO_T2,May-18,8.6,47.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,SW_LO_T3,May-18,8.6,47.9,edge_core_transect_100m_5scans,RIEGL VZ400,No,Kim Calders & Pieter De Frenne,Temperate broadleaf
+TLS,Bois_de_Lauzelles_ICP,,4.602852,50.680549,double_square_12pos,RIEGL VZ1000,No,Miro Demol,Temperate broadleaf
+TLS,Bois_de_Lauzelles_Pinus,,4.5972,50.6794,uniform_20m_0.48ha,RIEGL VZ1000,No,Miro Demol,temperate coniferous
+TLS,Coupure2018a,,3.709295,51.053271,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Platanus x acerifolia)
+TLS,Coupure2018b,,3.712142,51.048887,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Tilia)
+TLS,Coupure2019a,,3.708983,51.054172,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Platanus x acerifolia)
+TLS,Coupure2019b,,3.709589,51.054252,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Platanus x acerifolia)
+TLS,Coupure2019c,,3.714565,51.047094,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Tilia)
+TLS,Coupure2019d,,3.714996,51.047425,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Platanus x acerifolia)
+TLS,De_Mick,,4.5481,51.3109,uniform_20m_0.16ha,RIEGL VZ1000,No,Miro Demol,Temperate coniferous
+TLS,Doeveren_larix,,3.187421,51.120683,star_5_trees,RIEGL VZ400,No,Miro Demol,Temperate coniferous
+TLS,Doeveren_larix,,3.187421,51.120683,star_5_trees,RIEGL VZ400,No,Miro Demol,Temperate coniferous
+TLS,Doeveren_pinus,,3.189311,51.124095,star_5_trees,RIEGL VZ400,No,Miro Demol,Temperate coniferous
+TLS,Doeveren_pseudotsuga,,3.185566,51.121198,star_5_trees,RIEGL VZ400,No,Miro Demol,Temperate coniferous
+TLS,Galmaarden,,3.9617,50.7217,uniform_20m_0.36ha,RIEGL VZ1000,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_Fon_CP1,,2.780292,48.476366,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_Fon_CP2,,2.780292,48.476366,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_Fon_CP3,,2.780292,48.476366,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_Fon_CP4,,2.780292,48.476366,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_HoH_CP1,,11.222366,52.086565,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,ICOS_HoH_CP4,,11.222366,52.086565,ICOS_protocol_v1,RIEGL VZ400,No,Miro Demol,Temperate broadleaf
+TLS,Koophandelsplein,,3.720445,51.050327,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Platanus x acerifolia)
+TLS,Kouter,,3.723596,51.050014,both_sides_of_tree_row,RIEGL VZ400,No,Miro Demol,City trees (Tilia)
+TLS,Pastoorsbos,,4.545,51.3919,uniform_20m_0.48ha,RIEGL VZ1000,No,Miro Demol,Temperate broadleaf
+TLS,Suriname_Mangrove_SU1_PSP1,Aug-22,-57.009,5.963,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU1_PSP3,Aug-22,-57.009,5.966,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU2_PSP1,Aug-22,-56.8193,5.965,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU2_PSP3,Aug-22,-56.8193,5.968,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU4_PSP1,Aug-22,-56.2773,5.874,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU4_PSP3,Aug-22,-56.2773,5.877,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU5_PSP1,Aug-22,-56.0516,5.828,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU5_PSP3,Aug-22,-56.0516,5.832,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU6_PSP2,Sep-22,-55.9216,5.788,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU6_PSP4,Sep-22,-55.9225,5.79,Inventory_plot_25x20m_10pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU7_PSP1,Oct-22,-55.9161,5.825,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU7_PSP3,Oct-22,-55.9161,5.828,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU8b_PSP1,Jan-23,-55.5725,5.973,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU8b_PSP4,Jan-23,-55.5725,5.978,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU12_PSP1,Jan-23,-54.7417,5.9754,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU12_PSP3,Jan-23,-54.7417,5.9718,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU13_psp1,Sep-22,-54.3808,5.924,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU13_PSP3,Sep-22,-54.3809,5.92,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU14_PSP1,Sep-22,-54.1366,5.861,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU14_PSP3,Sep-22,-54.1366,5.858,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_SU15_PSP1,Aug-22,-54.0177,5.822,Inventory_plot_50x20m_18pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+TLS,Suriname_Mangrove_wnz,Jan-23,-55.1829,5.888,25mx25m_9pos,RIEGL VZ400i,No,Jasper Feyen,Mangrove
+Other - UAV LiDAR,DRO_CRANE,Sep-18,145.446111,-16.1028167,uniform10m_1ha + above panels,Ricopter + VUX-1,No,Kim Calders,Wet Tropics
+Other - UAV LiDAR,Litchfield,Sep-18,130.794429,-13.179233,uniform25m_1ha,Ricopter + VUX-1,No,Kim Calders,Tropical Savanna
+Other - UAV LiDAR,OliverCreek,Sep-18,145.441194,-16.136139,uniform10m_0.5ha,Ricopter + VUX-1,No,Kim Calders,Wet Tropics
+Other - UAV LiDAR,ROB06,Sep-18,145.634,-17.121,uniform10m_1ha,Ricopter + VUX-1,No,Kim Calders,Wet Tropics
+Other - UAV LiDAR,ROB17,Sep-18,145.634,-17.121,uniform10m_1ha,Ricopter + VUX-1,No,Kim Calders,Wet Tropics
+Other - UAV hyperspectral,DRO_CRANE,Sep-18,145.446111,-16.1028167,uniform10m_1ha + above panels,DJI M600 + Corning SHARK,No,Kim Calders,Wet Tropics
+Other - UAV hyperspectral,Litchfield,Sep-18,130.794429,-13.179233,uniform25m_1ha,DJI M600 + Corning SHARK,No,Kim Calders,Tropical Savanna
+Other - UAV hyperspectral,OliverCreek,Sep-18,145.441194,-16.136139,uniform10m_0.5ha,DJI M600 + Corning SHARK,No,Kim Calders,Wet Tropics
+Other - UAV hyperspectral,ROB06,Sep-18,145.634,-17.121,uniform10m_1ha,DJI M600 + Corning SHARK,No,Kim Calders,Wet Tropics
+Other - UAV hyperspectral,ROB17,Sep-18,145.634,-17.121,uniform10m_1ha,DJI M600 + Corning SHARK,No,Kim Calders,Wet Tropics

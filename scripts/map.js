@@ -1,6 +1,7 @@
 $(window).on('load', function() {
   var documentSettings = {};
-  var type2icon = {TLS: 'media/aus_tls_sites_display.png', 'Forest Census': 'media/placeholder.png', Other: 'media/placeholder.png'};
+  var type2icon = {TLS: 'media/aus_tls_sites_display.png', 'Forest Census': 'media/Tape-Measure.png', Other: 'media/Kangaroo.png'};
+  var type2iconsize = {TLS: [40, 40], 'Forest Census': [40,40], Other: [40,40]}
   var completePoints = false;
 
   /**
@@ -55,12 +56,17 @@ $(window).on('load', function() {
       // We currently discern three types of data, if you want to add more add it to the switch case here and add an image to the type2icon dictionary on line 3.
       switch (type) {
         case "TLS":
+          points[i].LegendType = "TLS"
+          break;
         case "Forest Census":
+          points[i].LegendType = "Forest Census"
+          break;
         case "Other":
+          points[i].LegendType = "Other"
           break;
         default:
           console.warn("ALERT: unidentified data type found (" + type + "), adding to Other type (point " + i + ")")
-          points[i].Type = "Other"
+          points[i].LegendType = "Other"
           type = "Other"
       }
       if (type && types.indexOf(type) === -1) {
@@ -93,15 +99,15 @@ $(window).on('load', function() {
       // extract month from starting date
       point.Month = point['Start Date'].substring(0,7)
 
-      var size = [60, 60];
-
+      size = type2iconsize[point.LegendType]
       var anchor = [size[0] / 2, size[1] / 2];
 
       var icon = L.icon({
-          iconUrl: type2icon[point.Type],
+          iconUrl: type2icon[point.LegendType],
           iconSize: size,
           iconAnchor: anchor
       });
+
 
       if (point.Latitude !== '' && point.Longitude !== '') {
         var marker = L.marker([point.Latitude, point.Longitude], {icon: icon})
@@ -115,7 +121,7 @@ $(window).on('load', function() {
               );
 
         if (layers !== undefined && layers.length !== 1) {
-          marker.addTo(layers[point.Type]);
+          marker.addTo(layers[point.LegendType]);
         }
 
         markerArray.push(marker);
@@ -197,7 +203,7 @@ $(window).on('load', function() {
       function updateTable() {
         var pointsVisible = [];
         for (i in points) {
-          if (map.hasLayer(layers[points[i].Type]) &&
+          if (map.hasLayer(layers[points[i].LegendType]) &&
               map.getBounds().contains(L.latLng(points[i].Latitude, points[i].Longitude))) {
             pointsVisible.push(points[i]);
           }
