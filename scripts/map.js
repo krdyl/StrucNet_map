@@ -1,7 +1,7 @@
 $(window).on('load', function() {
   var documentSettings = {};
-  var type2icon = {TLS: 'media/aus_tls_sites_display.png', 'Forest Census': 'media/Tape-Measure.png', Other: 'media/Kangaroo.png'};
-  var type2iconsize = {TLS: [40, 40], 'Forest Census': [40,40], Other: [40,40]}
+  var type2icon = {PLS: 'media/leaf.png', 'Forest Census': 'media/Tape-Measure.png', Other: 'media/Kangaroo.png'};
+  var type2iconsize = {PLS: [40, 40], 'Forest Census': [40,40], Other: [40,40]}
   var completePoints = false;
 
   /**
@@ -55,8 +55,8 @@ $(window).on('load', function() {
       var type = points[i].Type;
       // We currently discern three types of data, if you want to add more add it to the switch case here and add an image to the type2icon dictionary on line 3.
       switch (type) {
-        case "TLS":
-          points[i].LegendType = "TLS"
+        case "PLS":
+          points[i].LegendType = "PLS"
           break;
         case "Forest Census":
           points[i].LegendType = "Forest Census"
@@ -97,7 +97,7 @@ $(window).on('load', function() {
     for (var i in points) {
       var point = points[i];
       // extract month from starting date
-      point.Month = point['Start Date'].substring(0,7)
+      point.Month = point['Start Date'].substring(0,20)
 
       size = type2iconsize[point.LegendType]
       var anchor = [size[0] / 2, size[1] / 2];
@@ -113,7 +113,7 @@ $(window).on('load', function() {
         var marker = L.marker([point.Latitude, point.Longitude], {icon: icon})
           .bindPopup('<b>Plot Name: ' + point['Plot Name'] + '</b><br>' +
                   'Data type: ' + point['Type'] + '<br>' +
-                  'Month: ' + point['Month'] + '<br>' +
+                  'Start date: ' + point['Month'] + '<br>' +
                   'Protocol: ' + point['Protocol'] + '<br>' +
                   'Instrument: ' + point['Instrument'] + '<br>' +
                   'Lead Investigator: ' + point['Lead Investigator'] + '<br>' +
@@ -356,7 +356,7 @@ $(window).on('load', function() {
       }
     };
 
-    addTitle();
+    //addTitle();
 
     // Change Map attribution to include author's info + urls
     changeAttribution();
@@ -419,7 +419,7 @@ $(window).on('load', function() {
     if (dispTitle !== 'off') {
       //ar title = '<h3 class="pointer">' + getSetting('_mapTitle') + '</h3>';
       // show image instead of title
-      var title = '<img src="media/cavelab.png" alt="CAVElab Metadata" width="180" height="170">';
+      var title = '<img src="media/cavelab.png" width="180" height="170">';
       //var subtitle = '<h5>' + getSetting('_mapSubtitle') + '</h5>';
       // no subtitle
       var subtitle = ''
@@ -441,7 +441,7 @@ $(window).on('load', function() {
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'CAVElab, Ghent University'
+    var credit = 'Q-Forestlab, Ghent University'
     var name = getSetting('_authorName');
     var url = getSetting('_authorURL');
 
@@ -544,7 +544,7 @@ $(window).on('load', function() {
 
         $.when(
           $.get('./csv/cavelab-metadata-config-options.csv'),
-          $.get('./csv/cavelab-data.csv')
+          $.get('./csv/strucnetdata_map.csv')
         ).done(function(options, points) {
           // load data
           onMapDataLoad( parse(options), parse(points))

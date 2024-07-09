@@ -28,7 +28,7 @@ Point Legend Icon,,Insert a Font Awesome free and solid icon name (example: fa-b
 Table Controls,,
 Display Table,on,Display Table of all Points shown in current map 
 Table Height,30,Height of table (as percentage of map; 40 percent is default)
-Table Columns,"Type,Plot Name,Month,Instrument,Protocol,Timeseries,Lead Investigator, Forest type",Columns from Points sheet to display in Table (or leave blank)
+Table Columns,"Type,Country,Plot Name,Latitude,Longitude,Start Date,Protocol,Instrument,Timeseries,Lead Investigator,Forest type,Status",Columns from Points sheet to display in Table (or leave blank)
 Table Header Color,,"Background color of table header (default is black). If desired, insert a comma and specify table text color (default is black)."
 Polyline Map Controls,,
 Polyline Legend Title,,Show title at top of Polyline legend (or leave blank)
